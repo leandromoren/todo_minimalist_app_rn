@@ -19,8 +19,16 @@ const Todo = ({
                 hour={hour}
             />
             <View>
-                <Text style={styles.text}>{title}</Text>
-                <Text style={styles.time}>{hour}</Text>
+                <Text style={ 
+                    isCompleted 
+                    ? [styles.text, {textDecorationLine: 'line-through', color: '#73737360'}] 
+                    : styles.text 
+                    }>{title}</Text>
+                <Text style={
+                    isCompleted
+                    ? [styles.time, {textDecorationLine: 'line-through', color: '#73737360'}]
+                    : styles.time
+                    }>{hour}</Text>
             </View>
         </View>
     )

@@ -1,19 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView } from 'react-native';
-import TodoList from './componentes/TodoList';
+import Home from "./screens/Home";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <TodoList />
-    </SafeAreaView>
+    <Home/>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#fff',
-  }
-})
