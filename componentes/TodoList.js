@@ -3,7 +3,7 @@ import { todosData } from "../data/todos";
 import { FlatList } from "react-native";
 import Todo from "./Todo";
 
-const TodoList = () => {
+const TodoList = ({ todosData }) => {
     return (
         <FlatList
             data={todosData}
