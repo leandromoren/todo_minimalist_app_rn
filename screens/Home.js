@@ -5,20 +5,19 @@ import { todosData } from '../data/todos';
 
 const Home = () => {
     const [isHidden, setIsHidden] = React.useState(false);
-    const [localData, setLocalData] = React.useState(
-        todosData.sort((a, b) => {
-            //Pone los TODOS completados al final de la lista
-            return a.isCompleted - b.isCompleted;
-        }
-        )
-    );
+
+    //Pone los TODOS completados al final de la lista
+    const [localData, setLocalData] = React.useState(todosData.sort((a, b) => {
+        return a.isCompleted - b.isCompleted;
+    }));
+
+    //Oculta o Muestra los TODOS completados
     const handleHidePress = () => {
         if (isHidden) {
             setIsHidden(false);
             setLocalData(todosData.sort((a, b) => { return a.isCompleted - b.isCompleted; }));
             return;
         }
-
         setIsHidden(!isHidden)
         setLocalData(localData.filter((todo) => !todo.isCompleted));
     }
@@ -39,6 +38,9 @@ const Home = () => {
 
             <Text style={styles.title}>Mañana</Text>
             <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.plus}>+</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -61,6 +63,30 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 35,
         marginTop: 10
+    },
+    button: {
+        width: 42,
+        height: 42,
+        borderRadius: 21,
+        backgroundColor: '#000',
+        position: 'absolute',
+        bottom: 50,
+        right: 15,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: .5,
+        shadowRadius: 5,
+        elevation: 5
+    },
+    plus: {
+        fontSize: 40,
+        color: '#fff',
+        position: 'absolute',
+        top: -8,
+        left: 10
     }
 })
 
