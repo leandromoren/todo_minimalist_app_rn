@@ -1,6 +1,7 @@
 import * as React from "react";
 import { todosData } from "../data/todos";
 import { FlatList, View, Text } from "react-native";
+import Todo from "./Todo";
 
 const TodoList = () => {
     return (
@@ -8,9 +9,10 @@ const TodoList = () => {
             data={todosData}
             //Por cada item se renderiza un texto con el el texto del item
             renderItem={({item}) => (
-                <View>
-                    <Text>{item.title}</Text>
-                </View>
+                //Spread operator para recibir todos los parametros
+                <Todo
+                   {...item}
+                />
             )}
             keyExtractor={item => item.id.toString()}
         /> 
