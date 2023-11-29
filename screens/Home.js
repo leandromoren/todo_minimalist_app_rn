@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import TodoList from '../componentes/TodoList';
 import { todosData } from '../data/todos';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
     const [isHidden, setIsHidden] = React.useState(false);
@@ -10,6 +11,8 @@ const Home = () => {
     const [localData, setLocalData] = React.useState(todosData.sort((a, b) => {
         return a.isCompleted - b.isCompleted;
     }));
+
+    const navigation = useNavigation();
 
     //Oculta o Muestra los TODOS completados
     const handleHidePress = () => {
@@ -38,7 +41,7 @@ const Home = () => {
 
             <Text style={styles.title}>Mañana</Text>
             <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={ () => navigation.navigate('Agregar tarea') } style={styles.button}>
                 <Text style={styles.plus}>+</Text>
             </TouchableOpacity>
         </View>

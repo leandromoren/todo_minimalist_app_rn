@@ -15,9 +15,9 @@ export default function App() {
           options={{headerShown: false}} 
         />
         <Stack.Screen
-          name='Add'
+          name='Agregar tarea'
           component={AddTodo}
-          options={{headerShown: false}}
+          options={{presentation: 'modal'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
