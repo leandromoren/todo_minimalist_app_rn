@@ -18,20 +18,24 @@ const Todo = ({
                 isToday={isToday}
                 hour={hour}
             />
-            <Text style={styles.text}>{title}</Text>
-            <Text style={styles.time}>{hour}</Text>
+            <View>
+                <Text style={styles.text}>{title}</Text>
+                <Text style={styles.time}>{hour}</Text>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20
+        marginBottom: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     text: {
-        fontSize:15,
+        fontSize: 15,
         fontWeight: '500',
-        color:'#737373'
+        color: '#737373'
     },
     time: {
         fontSize: 13,

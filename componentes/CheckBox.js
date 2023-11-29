@@ -9,10 +9,13 @@ const Checkbox = ({
     isToday,
     hour
 }) => {
-    return(
+    return isToday ?(
         <TouchableOpacity style={isCompleted ? styles.checked : styles.unChecked}>
           {isCompleted && <Entypo name="check" size={16} color="#FAFAFA" />}
         </TouchableOpacity>
+
+    ) : (
+        <View style={styles.isToday}/>
     )
 }
 
@@ -51,6 +54,15 @@ const styles = StyleSheet.create({
         shadowOpacity: .3,
         shadowRadius: 5,
         elevation: 5
+    },
+    isToday: {
+        width: 10,
+        height: 10,
+        marginHorizontal: 10,
+        borderRadius: 10,
+        backgroundColor: '#262626',
+        marginRight: 13,
+        marginLeft: 15
     }
 })
 
