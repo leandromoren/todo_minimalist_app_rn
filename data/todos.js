@@ -29,4 +29,6 @@ const todosData = [
     },
 ]
 
-export default todosData;
+module.exports = {
+    todosData
+}
