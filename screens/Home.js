@@ -1,23 +1,41 @@
 import * as React from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import TodoList from '../componentes/TodoList';
 import { todosData } from '../data/todos';
 
 const Home = () => {
+    const [isHidden, setIsHidden] = React.useState(false);
     const [localData, setLocalData] = React.useState(
         todosData.sort((a, b) => {
             //Pone los TODOS completados al final de la lista
             return a.isCompleted - b.isCompleted;
-        })
+        }
+        )
     );
+    const handleHidePress = () => {
+        if (isHidden) {
+            setIsHidden(false);
+            setLocalData(todosData.sort((a, b) => { return a.isCompleted - b.isCompleted; }));
+            return;
+        }
+
+        setIsHidden(!isHidden)
+        setLocalData(localData.filter((todo) => !todo.isCompleted));
+    }
+
     return (
         <View style={styles.container}>
             <Image
                 source={require('../assets/logo.png')}
                 style={styles.pic}
             />
-            <Text style={styles.title}>Hoy</Text>
-            <TodoList todosData={todosData.filter((todo) => todo.isToday)} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text style={styles.title}>Hoy</Text>
+                <TouchableOpacity onPress={handleHidePress}>
+                    <Text style={{ color: '#3478f6' }}>{isHidden ? "Ver completados" : "Ocultar completados"}</Text>
+                </TouchableOpacity>
+            </View>
+            <TodoList todosData={localData.filter((todo) => todo.isToday)} />
 
             <Text style={styles.title}>Mañana</Text>
             <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
