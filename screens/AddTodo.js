@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Text,Button, View, TouchableOpacity, StyleSheet, TextInput, Switch } from "react-native";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { Text, View, TouchableOpacity, StyleSheet, TextInput, Switch } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const AddTodo = () => {
+const AddTodo = ({ dateCalendar }) => {
     const [name, setName] = React.useState('');
     const [date, setDate] = React.useState(new Date());
     const [isToday, setIsToday] = React.useState(false);
@@ -17,11 +16,11 @@ const AddTodo = () => {
         setIsDatePickerVisible(false);
     };
 
-    const handleConfirm = (date) => {
+    const handleConfirm = (dateCalendar) => {
         hideDatePicker();
     }
 
-    return(
+    return (
         <View style={styles.container}>
             <Text style={styles.title}>Agregar tarea</Text>
             <View style={styles.inputContainer}>
@@ -30,22 +29,21 @@ const AddTodo = () => {
                     style={styles.textInput}
                     placeholder='Tarea'
                     placeholderTextColor='#00000030'
-                    onChangeText={(text) => {setName(text)}}
+                    onChangeText={(text) => { setName(text) }}
                 />
             </View>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Hora</Text>
+                <Text style={styles.inputTitle}>Dia</Text>
                 <TouchableOpacity onPress={showDatePicker}>
-                    <Text style={styles.textInput}>{date.toLocaleTimeString()}</Text>
+                    <Text style={styles.textInputDate}>{date.toLocaleDateString()}</Text>
                 </TouchableOpacity>
-                <DateTimePickerModal 
+                <DateTimePickerModal
                     value={date}
-                    is24Hour={true}
+                    mode="date"
                     isVisible={isDatePickerVisible}
-                    mode='time'
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
-                    style={{width: '80%'}}
+                    style={{ width: '100%' }}
                 />
             </View>
         </View>
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F7F8FA',
-        paddingHorizontal: 30
+        paddingHorizontal: 30,
     },
     title: {
         fontSize: 34,
@@ -69,11 +67,17 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         lineHeight: 24,
     },
+    textInputDate: {
+        borderBottomColor: '#00000030',
+        borderBottomWidth: 1,
+        width: '100%',
+        height: 20
+    },
     textInput: {
         borderBottomColor: '#00000030',
         borderBottomWidth: 1,
         width: '70%',
-        height: 20
+        height: 20,
     },
     inputContainer: {
         flexDirection: 'row',

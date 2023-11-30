@@ -7,7 +7,7 @@ const Todo = ({
     title,
     isCompleted,
     isToday,
-    hour
+    dateCalendar
 }) => {
     return (
         <View style={styles.container}>
@@ -16,7 +16,7 @@ const Todo = ({
                 title={title}
                 isCompleted={isCompleted}
                 isToday={isToday}
-                hour={hour}
+                dateCalendar={dateCalendar}
             />
             <View>
                 <Text style={ 
@@ -28,7 +28,7 @@ const Todo = ({
                     isCompleted
                     ? [styles.time, {textDecorationLine: 'line-through', color: '#73737360'}]
                     : styles.time
-                    }>{hour}</Text>
+                    }>{dateCalendar}</Text>
             </View>
         </View>
     )

@@ -39,7 +39,7 @@ const Home = () => {
             </View>
             <TodoList todosData={localData.filter((todo) => todo.isToday)} />
 
-            <Text style={styles.title}>Mañana</Text>
+            <Text style={styles.title}>Proximo</Text>
             <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
             <TouchableOpacity onPress={ () => navigation.navigate('Agregar tarea') } style={styles.button}>
                 <Text style={styles.plus}>+</Text>

@@ -7,7 +7,7 @@ const Checkbox = ({
     title,
     isCompleted,
     isToday,
-    hour
+    dateCalendar
 }) => {
     return isToday ?(
         <TouchableOpacity style={isCompleted ? styles.checked : styles.unChecked}>
