@@ -53,6 +53,9 @@ const AddTodo = ({ dateCalendar }) => {
                     onValueChange={(value) => { setIsToday(value) }}
                 />
             </View>
+            <TouchableOpacity  style={styles.button}>
+                    <Text style={{color: 'white'}}>Listo</Text>
+                </TouchableOpacity>
         </View>
     )
 }
@@ -90,6 +93,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingBottom: 30,
+    },
+    button: {
+        marginTop: 30,
+        marginBottom: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#000000',
+        height: 46,
+        borderRadius: 11
     }
 })
 
