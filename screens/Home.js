@@ -3,6 +3,9 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import TodoList from '../componentes/TodoList';
 import { todosData } from '../data/todos';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { hideCompletedReducer, setTodosReducer } from '../redux/todosSlice';
 
 const Home = () => {
     const [isHidden, setIsHidden] = React.useState(false);
