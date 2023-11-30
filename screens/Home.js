@@ -38,7 +38,6 @@ const Home = () => {
                 </TouchableOpacity>
             </View>
             <TodoList todosData={localData.filter((todo) => todo.isToday)} />
-
             <Text style={styles.title}>Proximo</Text>
             <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
             <TouchableOpacity onPress={ () => navigation.navigate('Agregar tarea') } style={styles.button}>

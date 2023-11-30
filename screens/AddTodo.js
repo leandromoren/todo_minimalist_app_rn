@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View, TouchableOpacity, StyleSheet, TextInput, Switch } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const AddTodo = ({ dateCalendar }) => {
+const AddTodo = () => {
     const [name, setName] = React.useState('');
     const [date, setDate] = React.useState(new Date());
     const [isToday, setIsToday] = React.useState(false);
@@ -16,7 +16,7 @@ const AddTodo = ({ dateCalendar }) => {
         setIsDatePickerVisible(false);
     };
 
-    const handleConfirm = (dateCalendar) => {
+    const handleConfirm = () => {
         hideDatePicker();
     }
 
@@ -53,9 +53,10 @@ const AddTodo = ({ dateCalendar }) => {
                     onValueChange={(value) => { setIsToday(value) }}
                 />
             </View>
-            <TouchableOpacity  style={styles.button}>
-                    <Text style={{color: 'white'}}>Listo</Text>
-                </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Text style={{ color: 'white' }}>Listo</Text>
+            </TouchableOpacity>
+            <Text style={{ textAlign: 'center' , color: '#00000060'}}>Si desactivas la opcion de 'Hoy', la tarea sera considerada como proxima.</Text>
         </View>
     )
 }
