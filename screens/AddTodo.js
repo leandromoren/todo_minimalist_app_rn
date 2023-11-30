@@ -33,7 +33,7 @@ const AddTodo = ({ dateCalendar }) => {
                 />
             </View>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Dia</Text>
+                <Text style={styles.inputTitle}>Fecha</Text>
                 <TouchableOpacity onPress={showDatePicker}>
                     <Text style={styles.textInputDate}>{date.toLocaleDateString()}</Text>
                 </TouchableOpacity>
@@ -44,6 +44,13 @@ const AddTodo = ({ dateCalendar }) => {
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
                     style={{ width: '100%' }}
+                />
+            </View>
+            <View style={styles.inputContainer}>
+                <Text style={styles.inputTitle}>Hoy</Text>
+                <Switch
+                    value={isToday}
+                    onValueChange={(value) => { setIsToday(value) }}
                 />
             </View>
         </View>
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
     inputTitle: {
         fontSize: 20,
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: 24
     },
     textInputDate: {
         borderBottomColor: '#00000030',
