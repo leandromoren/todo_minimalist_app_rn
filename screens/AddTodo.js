@@ -18,6 +18,18 @@ const AddTodo = () => {
 
     const dispatch = useDispatch();
 
+    const showDatePicker = () => {
+        setIsDatePickerVisible(true);
+    };
+    
+    const hideDatePicker = () => {
+        setIsDatePickerVisible(false);
+    };
+    
+    const handleConfirm = () => {
+        hideDatePicker();
+    }
+
     const addTodo = async () => {
         const newTodo = {
             id: Math.floor(Math.random() * 1000000),
@@ -37,59 +49,48 @@ const AddTodo = () => {
             console.log(error);
         }
     }
-}
 
-const showDatePicker = () => {
-    setIsDatePickerVisible(true);
-};
-
-const hideDatePicker = () => {
-    setIsDatePickerVisible(false);
-};
-
-const handleConfirm = () => {
-    hideDatePicker();
-}
-
-return (
-    <View style={styles.container}>
-        <Text style={styles.title}>Agregar tarea</Text>
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputTitle}>Nombre</Text>
-            <TextInput
-                style={styles.textInput}
-                placeholder='Tarea'
-                placeholderTextColor='#00000030'
-                onChangeText={(text) => { setName(text) }}
-            />
-        </View>
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputTitle}>Fecha</Text>
-            <TouchableOpacity onPress={showDatePicker}>
-                <Text style={styles.textInputDate}>{date.toLocaleDateString()}</Text>
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Agregar tarea</Text>
+            <View style={styles.inputContainer}>
+                <Text style={styles.inputTitle}>Nombre</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Tarea'
+                    placeholderTextColor='#00000030'
+                    onChangeText={(text) => { setName(text) }}
+                />
+            </View>
+            <View style={styles.inputContainer}>
+                <Text style={styles.inputTitle}>Fecha</Text>
+                <TouchableOpacity onPress={showDatePicker}>
+                    <Text style={styles.textInputDate}>{date.toLocaleDateString()}</Text>
+                </TouchableOpacity>
+                <DateTimePickerModal
+                    value={date}
+                    mode="date"
+                    isVisible={isDatePickerVisible}
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                    onChange={(text) => { setDate(text) }}
+                    style={{ width: '100%' }}
+                />
+            </View>
+            <View style={styles.inputContainer}>
+                <Text style={styles.inputTitle}>Hoy</Text>
+                <Switch
+                    value={isToday}
+                    onValueChange={(value) => { setIsToday(value) }}
+                />
+            </View>
+            <TouchableOpacity style={styles.button} onPress={addTodo}>
+                <Text style={{ color: 'white' }}>Listo</Text>
             </TouchableOpacity>
-            <DateTimePickerModal
-                value={date}
-                mode="date"
-                isVisible={isDatePickerVisible}
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}
-                style={{ width: '100%' }}
-            />
+            <Text style={{ textAlign: 'center', color: '#00000060' }}>Si desactivas la opcion de 'Hoy', la tarea sera considerada como proxima.</Text>
         </View>
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputTitle}>Hoy</Text>
-            <Switch
-                value={isToday}
-                onValueChange={(value) => { setIsToday(value) }}
-            />
-        </View>
-        <TouchableOpacity style={styles.button} onPress={addTodo}>
-            <Text style={{ color: 'white' }}>Listo</Text>
-        </TouchableOpacity>
-        <Text style={{ textAlign: 'center', color: '#00000060' }}>Si desactivas la opcion de 'Hoy', la tarea sera considerada como proxima.</Text>
-    </View>
-)
+    )
+}
 
 const styles = StyleSheet.create({
     container: {

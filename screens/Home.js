@@ -10,22 +10,34 @@ import { hideCompletedReducer, setTodosReducer } from '../redux/todosSlice';
 const Home = () => {
     const [isHidden, setIsHidden] = React.useState(false);
 
-    //Pone los TODOS completados al final de la lista
-    const [localData, setLocalData] = React.useState(todosData.sort((a, b) => {
-        return a.isCompleted - b.isCompleted;
-    }));
+    const dispatch = useDispatch();
+    
+    const todos = useSelector((state) => state.todos.todos);
 
     const navigation = useNavigation();
 
+    React.useEffect(() => {
+        const getTodos = async () => {
+            try {
+                const todos = AsyncStorage.getItem('@Todos');
+                if (todos !== null) {
+                    dispatch(setTodosReducer(JSON.parse(todos)));
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    })
+
     //Oculta o Muestra los TODOS completados
     const handleHidePress = () => {
-        if (isHidden) {
-            setIsHidden(false);
-            setLocalData(todosData.sort((a, b) => { return a.isCompleted - b.isCompleted; }));
-            return;
-        }
-        setIsHidden(!isHidden)
-        setLocalData(localData.filter((todo) => !todo.isCompleted));
+        // if (isHidden) {
+        //     setIsHidden(false);
+        //     setLocalData(todos.sort((a, b) => { return a.isCompleted - b.isCompleted; }));
+        //     return;
+        // }
+        // setIsHidden(!isHidden)
+        // setLocalData(localData.filter((todo) => !todo.isCompleted));
     }
 
     return (
@@ -40,9 +52,9 @@ const Home = () => {
                     <Text style={{ color: '#3478f6' }}>{isHidden ? "Ver completados" : "Ocultar completados"}</Text>
                 </TouchableOpacity>
             </View>
-            <TodoList todosData={localData.filter((todo) => todo.isToday)} />
+            <TodoList todosData={todos.filter((todo) => todo.isToday)} />
             <Text style={styles.title}>Proximo</Text>
-            <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
+            <TodoList todosData={todos.filter((todo) => !todo.isToday)} />
             <TouchableOpacity onPress={ () => navigation.navigate('Agregar tarea') } style={styles.button}>
                 <Text style={styles.plus}>+</Text>
             </TouchableOpacity>
